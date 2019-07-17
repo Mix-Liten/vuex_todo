@@ -47,6 +47,7 @@ const actions = {
       updTodo
     );
 
+    // eslint-disable-next-line
     console.log(response.data);
 
     commit('updateTodo', response.data);
