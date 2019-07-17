@@ -31,7 +31,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Todos",
   methods: {
-    ...mapActions(["fetchTodos", "deleteTodo", "updateTodo"]),
+    ...mapActions(["fetchTodos", "deleteTodo", "updateTodo", "filterTodos"]),
     onDblClick(todo) {
       const updTodo = {
         id: todo.id,
@@ -42,7 +42,14 @@ export default {
       this.updateTodo(updTodo);
     }
   },
-  computed: mapGetters(["allTodos"]),
+  computed: {
+    ...mapGetters(["allTodos", "status"]),
+  },
+  watch: {
+    status(val) {
+      this.filterTodos(val);
+    }
+  },
   created() {
     this.fetchTodos();
   }
